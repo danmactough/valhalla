@@ -23,7 +23,8 @@
   "homepage": "https://github.com/valhalla/valhalla#readme",
   "dependencies": {
     "node-cmake": "^2.5.1",
-    "node-pre-gyp": "^0.10.0"
+    "node-pre-gyp": "^0.10.0",
+    "tape": "^4.9.0"
   },
   "binary": {
     "module_name": "node_valhalla",
