@@ -48,10 +48,14 @@ napi_value Route(napi_env env, napi_callback_info info) {
     napi_throw_error(env, NULL, "Failed to parse first argument to string");
   }
   std::string reqString(buffer, out);
-
-  valhalla::tyr::actor_t actor(Configuration);
-  auto route_json = actor.route(reqString);
-  actor.cleanup();
+  std::string route_json;
+  try {
+    valhalla::tyr::actor_t actor(Configuration);
+    route_json = actor.route(reqString);
+    actor.cleanup();
+  } catch (const std::exception& e) {
+    napi_throw_error(env, NULL, e.what());
+  }
 
   const char* outBuff = route_json.c_str();
   const auto nchars = route_json.size();
